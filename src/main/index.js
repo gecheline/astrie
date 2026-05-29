@@ -7,7 +7,11 @@ import * as db from './db.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-dotenv.config()
+dotenv.config({
+  path: app.isPackaged
+    ? path.join(process.resourcesPath, '.env')
+    : path.resolve(process.cwd(), '.env'),
+})
 
 let mainWindow
 let anthropic

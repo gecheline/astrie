@@ -7,6 +7,7 @@
     "dev": "electron-vite dev",
     "build": "electron-vite build",
     "preview": "electron-vite preview",
+    "dist": "electron-vite build && electron-builder --mac",
     "postinstall": "electron-rebuild -f -w better-sqlite3"
   },
   "devDependencies": {
@@ -26,12 +27,17 @@
   "build": {
     "appId": "com.astrie.app",
     "productName": "Astrie",
+    "files": [
+      "out/**/*"
+    ],
     "mac": {
       "target": "dmg",
-      "category": "public.app-category.productivity"
+      "category": "public.app-category.productivity",
+      "identity": null
     },
     "extraResources": [
-      { "from": ".env", "to": ".env" }
-    ]
+      { "from": ".env", "to": ".env", "filter": ["**/*"] }
+    ],
+    "npmRebuild": true
   }
 }
